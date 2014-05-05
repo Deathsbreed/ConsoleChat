@@ -59,6 +59,8 @@ public class ServerThread extends Thread {
 				" - /myUserName -- Returns your username.\n" +
 				" - /pm [id] [msg] -- Sends a message to only one of the clients.\n" +
 				" - /setUserName [newusername] -- Change your username.\n" +
+				" - /clientVersion -- Returns the version of the client.\n" +
+				" - /serverVersion -- Returns the version of the server.\n" +
 				" - /help -- Show this information.\n" +
 				" - /quit -- Quit.\n");
 			if(admin) {

@@ -92,6 +92,8 @@ public class Server implements Runnable {
 			if(input.equals("/quit")) {
 				clients.get(findClient(id)).send("/quit");
 				remove(id);
+			} else if(input.equals("/serverVersion")) {
+				clients.get(findClient(id)).send(version);
 			} else if(input.equals("/list")) {
 				int pos = findClient(id);
 				for(int i = 0; i < clients.size(); i++) {

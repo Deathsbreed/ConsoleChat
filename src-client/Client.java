@@ -47,10 +47,16 @@ public class Client implements Runnable {
 	}
 
 	public void run() {
+		String uinput;
 		while(thread != null) {
 			try {
-				streamOut.writeUTF(console.readLine());
-				streamOut.flush();
+				uinput = console.readLine();
+				if(uinput.equals("/clientVersion")) {
+					System.out.println(version);
+				} else {
+					streamOut.writeUTF(uinput);
+					streamOut.flush();
+				}
 			} catch(IOException e) {
 				System.out.println("Sending error: " + e.getMessage());
 				stop();
