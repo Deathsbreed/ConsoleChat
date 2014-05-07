@@ -1,4 +1,10 @@
 ConsoleChat
 ===========
 
-This program was made as a personal project to learn a bit of networking in Java. It is quite simple, and was made with Java 1.7 (although it can most likely work with 1.6 as well). Even though this was just made for personal learning, I do plan on improving on it every now and then by adding new features.
+This program was made as a personal project to learn Java network programming. The concept of it is rather simple, all it does is send messages to a server which, in turn, sends the message to everyone else (aside from some other commands added). Although the license does say GNU GPLv3, this license will not trully be enforced, however, take into account that if you make your programs open-source others like you will be able to learn from them.
+
+<h3>Compilation</h3>
+<i>Compile in the corresponding directory.</i>
+
+    $ javac Server.java
+    $ javac Client.java
