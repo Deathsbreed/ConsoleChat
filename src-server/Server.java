@@ -23,10 +23,11 @@ public class Server implements Runnable {
 		if(args.length != 1) {
 			System.out.println("You are using the program incorrectly.");
 		} else {
-			Server server = new Server(Integer.parseInt(args[0]));
+			new Server(Integer.parseInt(args[0]));
 		}
 	}
 
+	// The constructor method
 	public Server(int port) {
 		System.out.println("ConsoleChat server " + version + " Copyright (C) 2014 Nicolás A. Ortega\n" +
 			"This program comes with ABSOLUTELY NO WARRANTY; details in WARRANTY file.\n" +
@@ -43,6 +44,7 @@ public class Server implements Runnable {
 		}
 	}
 
+	// The run method that will be called every frame
 	public void run() {
 		while(thread != null) {
 			try {
@@ -55,6 +57,7 @@ public class Server implements Runnable {
 		}
 	}
 
+	// Start the server thread
 	public void start() {
 		if(thread == null) {
 			thread = new Thread(this);
@@ -62,6 +65,7 @@ public class Server implements Runnable {
 		}
 	}
 
+	// Stop the server thread and all other threads
 	public void stop() {
 		if(thread != null) {
 			thread.interrupt();
@@ -77,6 +81,7 @@ public class Server implements Runnable {
 		}
 	}
 
+	// This function loops through all the clients and returns the one with the ID entered
 	public int findClient(int id) {
 		for(int i = 0; i < clientCount; i++) {
 			if(clients.get(i).getID() == id) {
@@ -87,6 +92,7 @@ public class Server implements Runnable {
 		return -1;
 	}
 
+	// Handle any messages the server recieves
 	public synchronized void handle(int id, String username, String input) {
 		if(input.startsWith("/")) {
 			if(input.equals("/quit")) {
@@ -135,6 +141,7 @@ public class Server implements Runnable {
 		}
 	}
 
+	// Remove a client
 	public synchronized void remove(int id) {
 		int pos = findClient(id);
 		if(pos >= 0) {
@@ -156,6 +163,7 @@ public class Server implements Runnable {
 		}
 	}
 
+	// Add a new client
 	public void addThread(Socket socket) {
 		clients.add(new ServerThread(this, socket));
 		try {
@@ -167,7 +175,9 @@ public class Server implements Runnable {
 		}
 	}
 
+	// Getter methods
 	public String getPasswd() { return passwd; }
 
+	// Setter methods
 	public void setPasswd(String npasswd) { this.passwd = npasswd; }
 }

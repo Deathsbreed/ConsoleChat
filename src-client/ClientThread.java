@@ -16,6 +16,7 @@ public class ClientThread extends Thread {
 	private DataInputStream streamIn = null;
 	private boolean run = false;
 
+	// Constructor
 	public ClientThread(Client _client, Socket _socket) {
 		client = _client;
 		socket = _socket;
@@ -23,6 +24,7 @@ public class ClientThread extends Thread {
 		start();
 	}
 
+	// Open all necessary streams/threads
 	public void open() {
 		try {
 			streamIn = new DataInputStream(socket.getInputStream());
@@ -33,11 +35,13 @@ public class ClientThread extends Thread {
 		run = true;
 	}
 
+	// Close the streams
 	public void close() throws IOException {
 		if(streamIn != null) { streamIn.close(); }
 		run = false;
 	}
 
+	// The run method which will be called every frame
 	public void run() {
 		while(run) {
 			try {

@@ -20,6 +20,7 @@ public class ServerThread extends Thread {
 	private boolean run = false;
 	private boolean admin = false;
 
+	// Constructor method
 	public ServerThread(Server _server, Socket _socket) {
 		super();
 		this.socket = _socket;
@@ -27,6 +28,7 @@ public class ServerThread extends Thread {
 		id = socket.getPort();
 	}
 
+	// Method used to send a message to this client
 	public void send(String msg) {
 		try {
 			streamOut.writeUTF(msg);
@@ -38,6 +40,7 @@ public class ServerThread extends Thread {
 		}
 	}
 
+	// The run method which will run in a loop
 	public void run() {
 		System.out.println("Server thread " + id + " running.");
 		while(run) {
@@ -51,6 +54,7 @@ public class ServerThread extends Thread {
 		}
 	}
 
+	// Run a command
 	public void runCommand(String command) {
 		if(command.equals("/help")) {
 			send(" - /admin [passwd] -- Gain admin privileges.\n" +
@@ -98,6 +102,7 @@ public class ServerThread extends Thread {
 		}
 	}
 
+	// Open the streams
 	public void open() throws IOException {
 		streamIn = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 		streamOut = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
@@ -105,6 +110,7 @@ public class ServerThread extends Thread {
 		run = true;
 	}
 
+	// Close the streams
 	public void close() throws IOException {
 		if(socket != null) { socket.close(); }
 		if(streamIn != null) { streamIn.close(); }
@@ -112,9 +118,11 @@ public class ServerThread extends Thread {
 		run = false;
 	}
 
+	// Getter methods
 	public int getID() { return id; }
 	public String getUsername() { return username; }
 	public boolean isAdmin() { return admin; }
 
+	// Setter methods
 	public void setAdmin(boolean a) { this.admin = a; }
 }

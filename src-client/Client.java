@@ -23,10 +23,11 @@ public class Client implements Runnable {
 		if(args.length != 2) {
 			System.out.println("Usage: java Client [server] [port]");
 		} else {
-			Client client = new Client(args[0], Integer.parseInt(args[1]));
+			new Client(args[0], Integer.parseInt(args[1]));
 		}
 	}
 
+	// Constructor method
 	public Client(String server, int port) {
 		System.out.println("ConsoleChat client " + version + " Copyright (C) 2014 Nicolás A. Ortega\n" +
 			"This program comes with ABSOLUTELY NO WARRANTY; details in WARRANTY file.\n" +
@@ -46,6 +47,7 @@ public class Client implements Runnable {
 		}
 	}
 
+	// The run method containing the main loop
 	public void run() {
 		String uinput;
 		while(thread != null) {
@@ -64,6 +66,7 @@ public class Client implements Runnable {
 		}
 	}
 
+	// Handle messages
 	public void handle(String msg) {
 		if(msg.equals("/quit")) {
 			System.out.println("Goodbye bye. Press RETURN to exit...");
@@ -76,6 +79,7 @@ public class Client implements Runnable {
 		}
 	}
 
+	// Open and start all necessary threads
 	private void start() throws IOException {
 		console = new BufferedReader(new InputStreamReader(System.in));
 		streamOut = new DataOutputStream(socket.getOutputStream());
@@ -87,6 +91,7 @@ public class Client implements Runnable {
 		}
 	}
 
+	// Stop and close all necessary threads
 	public void stop() {
 		if(thread != null) {
 			thread.interrupt();
