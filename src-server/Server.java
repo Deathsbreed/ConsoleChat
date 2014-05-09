@@ -14,6 +14,7 @@ import java.util.*;
 public class Server implements Runnable {
 	private String version = "v1.0";
 	private ArrayList<ServerThread> clients = new ArrayList<ServerThread>();
+	private ServerData data = null;
 	private ServerSocket sSocket = null;
 	private Thread thread = null;
 	private int clientCount = 0;
@@ -63,6 +64,8 @@ public class Server implements Runnable {
 			thread = new Thread(this);
 			thread.start();
 		}
+
+		data = new ServerData(this);
 	}
 
 	// Stop the server thread and all other threads
