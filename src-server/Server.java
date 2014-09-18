@@ -4,7 +4,8 @@ import java.util.*;
 
 /**
  * @author Nicolás A. Ortega
- * @license GNU GPLv3
+ * @copyright Nicolás A. Ortega
+ * @license MIT
  * @year 2014
  * 
  * For details on the copyright, look at the COPYRIGHT file that came with
