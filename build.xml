@@ -1,0 +1,31 @@
+<project name="ConsoleChat" basedir="." default="main" >
+	<property name="src.dir" value="src" />
+	<property name="bin.dir" value="bin" />
+	<property name="classes.dir" value="${bin.dir}/classes" />
+	<property name="jar.dir" value="${bin.dir}/jar" />
+	<property name="main-class-client" value="consolechat.client.Client" />
+	<property name="main-class-server" value="consolechat.server.Server" />
+	
+	<target name="clean" >
+		<delete dir="bin" />
+	</target>
+	
+	<target name="compile" >
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" />
+	</target>
+	
+	<target name="jar" depends="compile" >
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.dir}/${ant.project.name}-client.jar" basedir="${classes.dir}" >
+			<manifest>
+				<attribute name="Main-Class" value="${main-class-client}" />
+			</manifest>
+		</jar>
+		<jar destfile="${jar.dir}/${ant.project.name}-server.jar" basedir="${classes.dir}" >
+			<manifest>
+				<attribute name="Main-Class" value="${main-class-server}" />
+			</manifest>
+		</jar>
+	</target>
+</project>

@@ -1,3 +1,5 @@
+package consolechat.server;
+
 import java.net.*;
 import java.io.*;
 import java.util.*;
