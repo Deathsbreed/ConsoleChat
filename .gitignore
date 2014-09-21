@@ -1,3 +1,2 @@
 # Ignore any binary files
-bin-client/*
-bin-server/*
+bin/
