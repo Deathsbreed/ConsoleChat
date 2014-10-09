@@ -6,7 +6,7 @@ This program was made as a personal project to learn Java network programming. T
 ###Compiling
 To compile the source code, make sure you have JDK and Apache Ant installed. Then run the following command:
 ```
-$ ant jar
+$ ant
 ```
 
 ###Contributing

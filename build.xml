@@ -28,4 +28,6 @@
 			</manifest>
 		</jar>
 	</target>
+
+	<target name="main" depends="jar" />
 </project>
