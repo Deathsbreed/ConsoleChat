@@ -21,7 +21,7 @@ public class Client implements Runnable {
 
 	public static void main(String[] args) {
 		if(args.length != 2) {
-			System.out.println("Usage: java Client [server] [port]");
+			System.out.println("Usage: consolechat-client [server] [port]");
 		} else {
 			new Client(args[0], Integer.parseInt(args[1]));
 		}

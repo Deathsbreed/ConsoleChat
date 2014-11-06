@@ -24,7 +24,7 @@ public class Server implements Runnable {
 
 	public static void main(String[] args) {
 		if(args.length != 1) {
-			System.out.println("You are using the program incorrectly.");
+			System.out.println("Usage: consolechat-server [port]");
 		} else {
 			new Server(Integer.parseInt(args[0]));
 		}
