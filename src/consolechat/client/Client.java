@@ -12,7 +12,7 @@ import java.lang.*;
  * 
  */
 public class Client implements Runnable {
-	private String version = "v1.0";
+	private String version = "v1.0.1";
 	private Socket socket = null;
 	private ClientThread cThread = null;
 	private DataOutputStream streamOut = null;
