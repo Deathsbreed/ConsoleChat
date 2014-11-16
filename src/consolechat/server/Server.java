@@ -45,6 +45,15 @@ public class Server implements Runnable {
 		} catch(IOException e) {
 			System.out.println(e);
 		}
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("adminpasswd.txt"));
+			try {
+				passwd = br.readLine();
+			} catch(IOException ioe) {
+				System.out.println("Error reading from adminpassword.txt.");
+			}
+		} catch(FileNotFoundException fnfe) { System.out.println("No adminpasswd.txt file."); }
 	}
 
 	// The run method that will be called every frame
@@ -182,5 +191,16 @@ public class Server implements Runnable {
 	public String getPasswd() { return passwd; }
 
 	// Setter methods
-	public void setPasswd(String npasswd) { this.passwd = npasswd; }
+	public void setPasswd(String npasswd) {
+		this.passwd = npasswd;
+		try {
+			PrintWriter writer = new PrintWriter("adminpasswd.txt", "UTF-8");
+			writer.println(npasswd);
+			writer.close();
+		} catch(UnsupportedEncodingException uee) {
+			System.out.println("Error writing new password to adminpasswd.txt");
+		} catch(FileNotFoundException fnfe) {
+			System.out.println("Error writing new password to adminpasswd.txt");
+		}
+	}
 }

@@ -83,7 +83,7 @@ public class Client implements Runnable {
 	private void start() throws IOException {
 		console = new BufferedReader(new InputStreamReader(System.in));
 		streamOut = new DataOutputStream(socket.getOutputStream());
-		
+
 		if(thread == null) {
 			cThread = new ClientThread(this, socket);
 			thread = new Thread(this);
