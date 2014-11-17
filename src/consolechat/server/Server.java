@@ -146,6 +146,14 @@ public class Server implements Runnable {
 				} else {
 					clients.get(findClient(id)).send("You are not admin.");
 				}
+			} else if(input.length() > 11 && input.substring(0, 4).equals("/ban")) {
+				if(clients.get(findClient(id)).isAdmin()) {
+					int bID = Integer.parseInt(input.substring(5, 10));
+					String reason = input.substring(12);
+					ban(bID, reason);
+				} else {
+					clients.get(findClient(id)).send("You are not admin.");
+				}
 			} else if(input.length() > 10 && input.substring(0, 10).equals("/giveadmin")) {
 				if(clients.get(findClient(id)).isAdmin()) {
 					int aID = Integer.parseInt(input.substring(11));
@@ -166,26 +174,39 @@ public class Server implements Runnable {
 		}
 	}
 
+	// Ban a client
+	public void ban(int id, String reason) {
+		int pos = findClient(id);
+		if(pos < 0) return;
+		String clientIP = clients.get(pos).getSocket().getRemoteSocketAddress().toString();
+		try {
+			PrintWriter banwriter = new PrintWriter(new BufferedWriter(new FileWriter("banned.txt", true)));
+			banwriter.println(clientIP);
+			banwriter.close();
+		} catch(IOException ioe) { System.out.println("Error printing client IP '" + clientIP + "' to banned.txt ."); }
+		clients.get(pos).send("You have been banned from this server.\nReason: " + reason);
+		remove(id);
+	}
+
 	// Remove a client
 	public synchronized void remove(int id) {
 		int pos = findClient(id);
-		if(pos >= 0) {
-			ServerThread toTerminate = clients.get(pos);
-			System.out.println("Remove client thread: " + id + " at " + pos);
-			try {
-				clients.get(pos).close();
-			} catch(IOException e) {
-				System.out.println("Error closing thread: " + e);
-			}
-			clients.remove(pos);
-			clientCount--;
-			try {
-				toTerminate.close();
-			} catch(IOException e) {
-				System.out.println("Error closing thread: " + e);
-			}
-			toTerminate.interrupt();
+		if(pos < 0) return;
+		ServerThread toTerminate = clients.get(pos);
+		System.out.println("Remove client thread: " + id + " at " + pos);
+		try {
+			clients.get(pos).close();
+		} catch(IOException e) {
+			System.out.println("Error closing thread: " + e);
 		}
+		clients.remove(pos);
+		clientCount--;
+		try {
+			toTerminate.close();
+		} catch(IOException e) {
+			System.out.println("Error closing thread: " + e);
+		}
+		toTerminate.interrupt();
 	}
 
 	// Add a new client

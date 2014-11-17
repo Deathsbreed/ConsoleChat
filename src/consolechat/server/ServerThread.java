@@ -123,6 +123,7 @@ public class ServerThread extends Thread {
 
 	// Getter methods
 	public int getID() { return id; }
+	public Socket getSocket() { return socket; }
 	public String getUsername() { return username; }
 	public boolean isAdmin() { return admin; }
 
