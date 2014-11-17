@@ -190,6 +190,11 @@ public class Server implements Runnable {
 
 	// Add a new client
 	public void addThread(Socket socket) {
+		// If IP is banned to not admit!
+		for(int i = 0; i < banned.size(); i++) {
+			if(socket.getRemoteSocketAddress().toString().equals(banned.get(i))) return;
+		}
+		// Otherwise add them
 		clients.add(new ServerThread(this, socket));
 		try {
 			clients.get(clientCount).open();
