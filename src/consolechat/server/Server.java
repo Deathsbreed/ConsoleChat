@@ -21,6 +21,7 @@ public class Server implements Runnable {
 	private Thread thread = null;
 	private int clientCount = 0;
 	private String passwd = "admin";
+	private ArrayList<String> banned = new ArrayList<String>();
 
 	public static void main(String[] args) {
 		if(args.length != 1) {
@@ -46,14 +47,26 @@ public class Server implements Runnable {
 			System.out.println(e);
 		}
 
+		// Read admin password
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("adminpasswd.txt"));
+			BufferedReader passwdbuffer = new BufferedReader(new FileReader("adminpasswd.txt"));
 			try {
-				passwd = br.readLine();
+				passwd = passwdbuffer.readLine();
 			} catch(IOException ioe) {
 				System.out.println("Error reading from adminpassword.txt.");
 			}
 		} catch(FileNotFoundException fnfe) { System.out.println("No adminpasswd.txt file."); }
+
+		// Read banned list
+		try {
+			String bannedIP;
+			BufferedReader banbuffer = new BufferedReader(new FileReader("banned.txt"));
+			try {
+				while((bannedIP = banbuffer.readLine()) != null) {
+					banned.add(bannedIP);
+				}
+			} catch(IOException ioe) { System.out.println("Error while reading from banned.txt"); }
+		} catch(FileNotFoundException fnfe) { System.out.println("No banned.txt file."); }
 	}
 
 	// The run method that will be called every frame
