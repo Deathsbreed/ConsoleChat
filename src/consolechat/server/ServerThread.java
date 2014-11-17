@@ -74,7 +74,8 @@ public class ServerThread extends Thread {
 				send("Admin commands:\n" +
 					" - /chgpasswd [newpasswd] -- Change the server admin password.\n" +
 					" - /giveadmin [id] -- Give another client admin as well.\n" +
-					" - /kick [id] [reason] -- Kick out a user and state a reason for the kick.\n");
+					" - /kick [id] [reason] -- Kick out a user and state a reason for the kick.\n" +
+					" - /ban [id] [reason] -- Ban a user from ever being able to connect to the server again.\n");
 			}
 		} else if(command.length() > 6 && command.substring(0, 6).equals("/admin")) {
 			if(command.substring(7).equals(server.getPasswd())) {

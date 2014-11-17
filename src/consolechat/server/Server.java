@@ -149,7 +149,7 @@ public class Server implements Runnable {
 			} else if(input.length() > 11 && input.substring(0, 4).equals("/ban")) {
 				if(clients.get(findClient(id)).isAdmin()) {
 					int bID = Integer.parseInt(input.substring(5, 10));
-					String reason = input.substring(12);
+					String reason = input.substring(11);
 					ban(bID, reason);
 				} else {
 					clients.get(findClient(id)).send("You are not admin.");
