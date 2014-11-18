@@ -219,6 +219,7 @@ public class Server implements Runnable {
 		clients.add(new ServerThread(this, socket));
 		try {
 			clients.get(clientCount).open();
+			clients.get(clientCount).send("Use /help for a list of commands.\n");
 			clients.get(clientCount).start();
 			clientCount++;
 		} catch(IOException e) {
