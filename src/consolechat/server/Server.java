@@ -178,7 +178,8 @@ public class Server implements Runnable {
 	public void ban(int id, String reason) {
 		int pos = findClient(id);
 		if(pos < 0) return;
-		String clientIP = clients.get(pos).getSocket().getRemoteSocketAddress().toString();
+		String clientAddress = clients.get(pos).getSocket().getRemoteSocketAddress().toString();
+		String clientIP = clientAddress.substring(1, clientAddress.indexOf(':'));
 		try {
 			PrintWriter banwriter = new PrintWriter(new BufferedWriter(new FileWriter("banned.txt", true)));
 			banwriter.println(clientIP);
@@ -212,8 +213,10 @@ public class Server implements Runnable {
 	// Add a new client
 	public void addThread(Socket socket) {
 		// If IP is banned to not admit!
+		String clientAddress = socket.getRemoteSocketAddress().toString();
+		String clientIP = clientAddress.substring(1, clientAddress.indexOf(':'));
 		for(int i = 0; i < banned.size(); i++) {
-			if(socket.getRemoteSocketAddress().toString().equals(banned.get(i))) return;
+			if(clientIP.equals(banned.get(i))) return;
 		}
 		// Otherwise add them
 		clients.add(new ServerThread(this, socket));
