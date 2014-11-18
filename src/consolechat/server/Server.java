@@ -10,9 +10,6 @@ import java.util.*;
  * @license MIT
  * @year 2014
  * 
- * For details on the copyright, look at the COPYRIGHT file that came with
- * this program.
- * 
  */
 public class Server implements Runnable {
 	private String version = "v1.1";

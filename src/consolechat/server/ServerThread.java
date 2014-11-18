@@ -9,9 +9,6 @@ import java.io.*;
  * @license MIT
  * @year 2014
  * 
- * For details on the copyright, look at the COPYRIGHT file that came with
- * this program.
- * 
  */
 public class ServerThread extends Thread {
 	private Server server = null;
