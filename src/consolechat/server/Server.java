@@ -15,7 +15,7 @@ import java.util.*;
  * 
  */
 public class Server implements Runnable {
-	private String version = "v1.0.1";
+	private String version = "v1.1";
 	private ArrayList<ServerThread> clients = new ArrayList<ServerThread>();
 	private ServerSocket sSocket = null;
 	private Thread thread = null;
